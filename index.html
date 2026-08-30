@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReWeight: Leveraging Egocentric Human Data for VLA Post-Training via Demonstration Retrieval and Sample Weighting</title>
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet"> -->
+
+  <!-- <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <link rel="icon" href="./static/images/favicon.jpg">
+
+
+
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <meta property="og:image:width" content="1600" />
+  <meta property="og:image:height" content="900" />
+
+</head>
+
+  <body>
+    <section class="hero">
+      <div class="hero-body no-bottom-padding">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                ReWeight: Leveraging Egocentric Human Data for VLA Post-Training via Demonstration Retrieval and Sample Weighting  
+              </h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  Anonymous Authors
+                  <br />Affiliations withheld for anonymous review
+                </span>
+              </div>
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF Link. -->
+                  <!-- <span class="link-block">
+                    <a href="https://arxiv.org/abs/2406.00439"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span> -->
+  
+                    <!-- Dataset Link. -->
+                    <!-- <span class="link-block">
+                      <a href="https://huggingface.co/collections/furonghuang-lab/tracevla-677d98483d23e9cec903d076"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <img src="static/images/hf_icon.svg" />
+                        </span>
+                        <span>Models</span>
+                        </a>
+                      </span> -->
+                </div>
+    
+              </div>
+              </div>
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- overview -->
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <div align="center">
+            <img src="./static/images/fig-teaser.png" alt="method overview" width="95%">
+          </div>  
+          <br> 
+          <p class="overview-caption">
+            Overview of <strong>ReWeight</strong>, a framework that retrieves transferable human demonstrations and assigns sample-level weights for VLA post-training.
+          </p>
+          
+        </div>
+    
+      </div>
+    </section>
+
+    <!-- Abstract -->
+    <section class="hero is-light is-small">
+      <div class="hero-body">
+        <div class="container is-two-thirds">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-two-thirds">
+              <h2 class="title is-3">Abstract</h2>
+            </div>
+        </div>
+      
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-two-thirds ">
+            <div class="content has-text-justified">
+              Large-scale egocentric human demonstrations provide a scalable source of embodied supervision for Vision-Language-Action (VLA) models, but effectively leveraging them for downstream VLA post-training remains challenging because human demonstrations vary in their relevance to a target robot and task distribution. We introduce <strong>ReWeight</strong>, a relevance-aware framework that selectively incorporReWeights egocentric human demonstrations into VLA post-training. <strong>EgoWeight</strong> learns a cross-embodiment visuomotor representation to retrieve relevant human demonstrations and assign sample-specific weights according to fine-grained human-robot discrepancy. Across eight RoboTwin 2.0 tasks and four real-world bimanual manipulation tasks, ReWeight consistently improves over robot-only post-training and naive human-robot data mixing.
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two-stages Method  -->
+    <section class="section body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">Retrieve Relevant Human Demonstrations & ReWeight VLA Post-Training</h2>
+            <!-- <h2 class="subtitle is-4" style="text-align: center;">Defining Visual Affordances</h2> -->
+            <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths ">
+            <div class="content has-text-justified">
+              
+              <tr>
+                <td>
+                  <div class="col">
+                    <div class="row">
+                      <img class="method-figure" src="./static/images/method_2.png" alt="method overview" width="100%">
+                    </div>
+                  </div>
+                  <div class="columns is-centered">
+                    <div class="column">
+                          <p style="text-align: justify;font-size: 18px">Overview of the proposed <strong>ReWeight</strong> framework. <strong>We</strong> first refines egocentric human motions into executable robot action references, while <strong>EgoWeight</strong> learns a cross-embodiment visuomotor representation to retrieve relevant human demonstrations and assign sample-level training weights. The resulting robot data and weighted human data are jointly used for VLA post-training.</p>
+                  </div>
+                </div>
+                </td>
+              </tr>
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Alignment Visualization Results -->
+    <section class="section body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">Alignment Visualization Results</h2>
+            <div class="columns is-centered">
+              <div class="column is-11">
+                <h4 class="alignment-group-title">Simulation</h4>
+                <div class="alignment-example-grid">
+                  <div class="alignment-example">
+                    <div class="alignment-frame">
+                      <video autoplay controls muted loop playsinline>
+                        <source src="./static/video/alignment_example/Simulation/Stack_Bowls/human2robot.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="alignment-caption">Stack Bowls</div>
+                  </div>
+                  <div class="alignment-example">
+                    <div class="alignment-frame">
+                      <video autoplay controls muted loop playsinline>
+                        <source src="./static/video/alignment_example/Simulation/Stack_Blocks/human2robot.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="alignment-caption">Stack Blocks</div>
+                  </div>
+                  <div class="alignment-example">
+                    <div class="alignment-frame">
+                      <video autoplay controls muted loop playsinline>
+                        <source src="./static/video/alignment_example/Simulation/Drawer_Place/human2robot.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="alignment-caption">Drawer Place</div>
+                  </div>
+                  <div class="alignment-example">
+                    <div class="alignment-frame">
+                      <video autoplay controls muted loop playsinline>
+                        <source src="./static/video/alignment_example/Simulation/Pick_Place_Food/human2robot.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="alignment-caption">Pick Place Food</div>
+                  </div>
+                </div>
+
+                <h4 class="alignment-group-title">Real-world</h4>
+                <div class="alignment-example-grid">
+                  <div class="alignment-example">
+                    <div class="alignment-frame">
+                      <video autoplay controls muted loop playsinline>
+                        <source src="./static/video/alignment_example/Real-World/Stack_Bowls/human2robot.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="alignment-caption">Stack Bowls</div>
+                  </div>
+                  <div class="alignment-example">
+                    <div class="alignment-frame">
+                      <video autoplay controls muted loop playsinline>
+                        <source src="./static/video/alignment_example/Real-World/Drawer/human2robot.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="alignment-caption">Place Teddy in the Drawer</div>
+                  </div>
+                  <div class="alignment-example">
+                    <div class="alignment-frame">
+                      <video autoplay controls muted loop playsinline>
+                        <source src="./static/video/alignment_example/Real-World/Fruits/human2robot.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="alignment-caption">Place Fruits Basket</div>
+                  </div>
+                  <div class="alignment-example">
+                    <div class="alignment-frame">
+                      <video autoplay controls muted loop playsinline>
+                        <source src="./static/video/alignment_example/Real-World/Stapler/human2robot.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                    <div class="alignment-caption">Press Stapler</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Simulation Experiment Results -->
+    <section class="section body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">
+              Simulation Results: RoboTwin 2.0
+            </h2>
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                  <div class="columns is-centered">
+                    <div class="column is-half">
+                      <img src="./static/images/retrieval_weighting_clean_horizontal.svg" alt="RoboTwin 2.0 Robot-Only Results" width="100%">
+                    </div>
+                    <div class="column is-half">
+                      <img src="./static/images/retrieval_weighting_randomized_horizontal.svg" alt="RoboTwin 2.0 ReWeight Results" width="100%">
+                    </div>
+                  </div>
+                  <p style="text-align: left; font-size: 18px; margin-top: 15px; padding-left: 10px;">
+                    <strong>RoboTwin 2.0 — VLA Post-Training</strong>: <strong>ReWeight</strong> selectively retrieves and weights egocentric human demonstrations for post-training, consistently outperforming both <strong>Robot-Only</strong> training and <strong>Mixed Data (Random)</strong> human-robot data mixing across eight simulation tasks. The results show that relevant and fine-grained weighted human experience is more effective than indiscriminately adding human demonstrations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+
+    <section class="section body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">Real-world Results</h2>
+            <!-- <h2 class="subtitle is-4" style="text-align: center;">Defining Visual Affordances</h2> -->
+            <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths ">
+              <div class="content has-text-justified">
+                <p>
+                  Below are videos of <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight</strong> on real-world bimanual manipulation tasks. (Videos are sped up by 2x.)
+                </p>
+              </div>
+              <div class="content has-text-justified">
+                <p><strong>ReWeight</strong> improves real-world VLA post-training by retrieving transferable egocentric human demonstrations and assigning sample-level weights, yielding stronger performance than robot-only training and naive human-robot data mixing.</p>
+
+              </div>
+              <div class="columns is-vcentered interpolation-panel">
+                <div class="column  has-text-centered">
+                  <h5>Stack Bowls</h5>
+                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
+                    (Real-world Bimanual Task)
+                  </p>
+                  <div class="realworld-video">
+                    <video autoplay controls muted loop playsinline width="100%">
+                        <source src="./static/video/base/stack_bowls/ori.mp4" type="video/mp4">
+                    </video>
+                    <div class="realworld-video-label">
+                        Robot-Only
+                    </div>
+                </div>
+                <div class="realworld-video">
+                  <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/stack_bowls/mix.mp4" type="video/mp4">
+                  </video>
+                  <div class="realworld-video-label">
+                      Mixed Data (Random)
+                  </div>
+                </div>
+                <div class="realworld-video">
+                  <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/stack_bowls/ReWeight.mp4" type="video/mp4">
+                  </video>
+                  <div class="realworld-video-label">
+                      ReWeight (Ours)
+                  </div>
+                </div>
+                </div>
+                <div class="column  has-text-centered">
+                  <h5>Place Teddy in the Drawer</h5>
+                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
+                    (Real-world Bimanual Task)
+                  </p>
+                  <div class="realworld-video">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/place_teddy_in_the_drawer/ori.mp4" type="video/mp4">
+                    </video>
+                    <div class="realworld-video-label">
+                      Robot-Only
+                    </div>
+                  </div>
+                  <div class="realworld-video">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/place_teddy_in_the_drawer/mix.mp4" type="video/mp4">
+                    </video>
+                    <div class="realworld-video-label">
+                      Mixed Data (Random)
+                    </div>
+                  </div>
+                  <div class="realworld-video">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/place_teddy_in_the_drawer/ReWeight.mp4" type="video/mp4">
+                    </video>
+                    <div class="realworld-video-label">
+                      ReWeight (Ours)
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="columns is-vcentered interpolation-panel">
+                <div class="column  has-text-centered">
+                  <h5>Place Fruits Basket</h5>
+                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
+                    (Real-world Bimanual Task)
+                  </p>
+                  <div class="realworld-video">
+                    <video autoplay controls muted loop playsinline width="100%">
+                        <source src="./static/video/base/place_fruits_basket/ori.mp4" type="video/mp4">
+                    </video>
+                    <div class="realworld-video-label">
+                        Robot-Only
+                    </div>
+                </div>
+                <div class="realworld-video">
+                  <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/place_fruits_basket/mix.mp4" type="video/mp4">
+                  </video>
+                  <div class="realworld-video-label">
+                      Mixed Data (Random)
+                  </div>
+                </div>
+                <div class="realworld-video">
+                  <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/place_fruits_basket/ReWeight.mp4" type="video/mp4">
+                  </video>
+                  <div class="realworld-video-label">
+                      ReWeight (Ours)
+                  </div>
+                </div>
+                </div>
+                <div class="column  has-text-centered">
+                  <h5>Press Stapler</h5>
+                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
+                    (Real-world Bimanual Task)
+                  </p>
+                  <div class="realworld-video">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/press_stapler/ori.mp4" type="video/mp4">
+                    </video>
+                    <div class="realworld-video-label">
+                      Robot-Only
+                    </div>
+                  </div>
+                  <div class="realworld-video">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/press_stapler/mix.mp4" type="video/mp4">
+                    </video>
+                    <div class="realworld-video-label">
+                      Mixed Data (Random)
+                    </div>
+                  </div>
+                  <div class="realworld-video">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/press_stapler/ReWeight.mp4" type="video/mp4">
+                    </video>
+                    <div class="realworld-video-label">
+                      ReWeight (Ours)
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+              
+  
+              <!-- <div class="columns is-centered">
+                <div class="column">
+                  <p>We evaluate four real-world bimanual manipulation tasks, where <strong>ReWeight</strong> outperforms <strong>Robot-Only</strong> and <strong>Mixed Data (Random)</strong> baselines by selectively using relevant egocentric human demonstrations.</p>
+              
+                  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
+                    <div style="width: 48%; border: 2px solid #7D98C3; border-radius: 15px; padding: 10px;">
+                      <strong>Stack Bowls</strong>
+                    </div>
+                    <div style="width: 48%; border: 2px solid #7D98C3; border-radius: 15px; padding: 10px;">
+                      <strong>Place Teddy in the Drawer</strong>
+                    </div>
+                    <div style="width: 48%; border: 2px solid #7D98C3; border-radius: 15px; padding: 10px;">
+                      <strong>Place Fruits Basket</strong>
+                    </div>
+                    <div style="width: 48%; border: 2px solid #7D98C3; border-radius: 15px; padding: 10px;">
+                      <strong>Press Stapler</strong>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+                  
+
+                </div>
+              </div>
+                <div class="row">
+                  <div class="col">
+                    <img class="realworld-results-figure" src="static/images/real_world_results.png" alt="real-world results">
+                  </div>
+                </div>
+                <div class="columns is-centered ">
+                  <div class="column">
+                      <p style="text-align: left;font-size: 18px">Real-world evaluation on physical robot experiments. The results compare <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight (Ours)</strong> across four tasks and the overall average, showing that selectively retrieved and weighted human demonstrations lead to stronger VLA post-training performance.</p>
+                </div>
+              </div>
+                </td>
+              </tr>
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+    <!-- Real-world Generalization Experiment Results -->
+
+    <section class="section body">
+      <div class="container">
+        <h2 class="title is-3" style="text-align:center; padding-bottom:10px;">Real-world Generalization Experiment Results</h2>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <p style="text-align: left; font-size: 18px;">
+              We further evaluate robustness under varying illumination and visual distractors, comparing <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight (Ours)</strong> under each setting.
+            </p>
+          </div>
+        </div>
+
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <div class="generalization-result-table-wrap">
+              <table class="generalization-result-table">
+                <caption>Real-world generalization under environmental perturbations.</caption>
+                <thead>
+                  <tr>
+                    <th>Tasks</th>
+                    <th>Methods</th>
+                    <th>Lighting</th>
+                    <th>Distractors</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th rowspan="3" scope="rowgroup">Stack Bowls</th>
+                    <td>Robot-Only</td>
+                    <td>2/10</td>
+                    <td>2/10</td>
+                    <td>4/20</td>
+                  </tr>
+                  <tr>
+                    <td>Mixed Data (Random)</td>
+                    <td>4/10</td>
+                    <td>2/10</td>
+                    <td>6/20</td>
+                  </tr>
+                  <tr class="ours-row">
+                    <td>ReWeight (Ours)</td>
+                    <td><strong>7/10</strong></td>
+                    <td><strong>5/10</strong></td>
+                    <td><strong>12/20</strong></td>
+                  </tr>
+                  <tr>
+                    <th rowspan="3" scope="rowgroup">Place Teddy in the Drawer</th>
+                    <td>Robot-Only</td>
+                    <td>3/10</td>
+                    <td><strong>5/10</strong></td>
+                    <td>8/20</td>
+                  </tr>
+                  <tr>
+                    <td>Mixed Data (Random)</td>
+                    <td><strong>6/10</strong></td>
+                    <td>4/10</td>
+                    <td><strong>10/20</strong></td>
+                  </tr>
+                  <tr class="ours-row">
+                    <td>ReWeight (Ours)</td>
+                    <td>5/10</td>
+                    <td><strong>5/10</strong></td>
+                    <td><strong>10/20</strong></td>
+                  </tr>
+                  <tr>
+                    <th rowspan="3" scope="rowgroup">Place Fruits Basket</th>
+                    <td>Robot-Only</td>
+                    <td>5/10</td>
+                    <td>4/10</td>
+                    <td>9/20</td>
+                  </tr>
+                  <tr>
+                    <td>Mixed Data (Random)</td>
+                    <td>5/10</td>
+                    <td>7/10</td>
+                    <td>12/20</td>
+                  </tr>
+                  <tr class="ours-row">
+                    <td>ReWeight (Ours)</td>
+                    <td><strong>7/10</strong></td>
+                    <td><strong>9/10</strong></td>
+                    <td><strong>16/20</strong></td>
+                  </tr>
+                  <tr>
+                    <th rowspan="3" scope="rowgroup">Press Stapler</th>
+                    <td>Robot-Only</td>
+                    <td>2/10</td>
+                    <td>0/10</td>
+                    <td>2/20</td>
+                  </tr>
+                  <tr>
+                    <td>Mixed Data (Random)</td>
+                    <td>3/10</td>
+                    <td>2/10</td>
+                    <td>5/20</td>
+                  </tr>
+                  <tr class="ours-row">
+                    <td>ReWeight (Ours)</td>
+                    <td><strong>5/10</strong></td>
+                    <td><strong>5/10</strong></td>
+                    <td><strong>10/20</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    
+        <!-- 切换按钮 -->
+        <div class="columns is-centered has-text-centered" style="margin-bottom: 20px;">
+          <div class="column is-half" style="display:flex; justify-content:center; gap:20px; position:relative;">
+            <button class="tab-btn" data-index="0" style="background-color:#7D98C3; color:white; padding:10px 20px; border:none; cursor:pointer; border-radius:15px;">Varying Illumination</button>
+            <button class="tab-btn" data-index="1" style="background-color:#D4A6C8; color:white; padding:10px 20px; border:none; cursor:pointer; border-radius:15px;">Visual Distractor</button>
+            <div id="tab-slider" style="position:absolute; bottom:0; height:4px; background:#000; transition:all 0.3s ease; border-radius:2px;"></div>
+          </div>
+        </div>
+    
+        <!-- 视频组容器 -->
+        <div id="video-wrapper" class="generalization-wrapper">
+          <div id="video-inner" class="generalization-inner">
+            <div class="generalization-panel generalization-panel-light">
+              <div class="generalization-table">
+                <div class="generalization-row">
+                  <h5 class="generalization-task">Stack Bowls</h5>
+                  <div class="generalization-videos">
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/stack_bowls/ori.mp4" type="video/mp4"></video><div>Robot-Only</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/stack_bowls/mix.mp4" type="video/mp4"></video><div>Mixed Data (Random)</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/stack_bowls/ReWeight.mp4" type="video/mp4"></video><div>ReWeight (Ours)</div></div>
+                  </div>
+                </div>
+                <div class="generalization-row">
+                  <h5 class="generalization-task">Place Teddy in the Drawer</h5>
+                  <div class="generalization-videos">
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/place_teddy_in_the_drawer/ori.mp4" type="video/mp4"></video><div>Robot-Only</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/place_teddy_in_the_drawer/mix.mp4" type="video/mp4"></video><div>Mixed Data (Random)</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/place_teddy_in_the_drawer/ReWeight.mp4" type="video/mp4"></video><div>ReWeight (Ours)</div></div>
+                  </div>
+                </div>
+                <div class="generalization-row">
+                  <h5 class="generalization-task">Place Fruits Basket</h5>
+                  <div class="generalization-videos">
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/place_fruits_basket/ori.mp4" type="video/mp4"></video><div>Robot-Only</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/place_fruits_basket/mix.mp4" type="video/mp4"></video><div>Mixed Data (Random)</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/place_fruits_basket/ReWeight.mp4" type="video/mp4"></video><div>ReWeight (Ours)</div></div>
+                  </div>
+                </div>
+                <div class="generalization-row">
+                  <h5 class="generalization-task">Press Stapler</h5>
+                  <div class="generalization-videos">
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/press_stapler/ori.mp4" type="video/mp4"></video><div>Robot-Only</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/press_stapler/mix.mp4" type="video/mp4"></video><div>Mixed Data (Random)</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/light/press_stapler/ReWeight.mp4" type="video/mp4"></video><div>ReWeight (Ours)</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="generalization-panel generalization-panel-distractor">
+              <div class="generalization-table">
+                <div class="generalization-row">
+                  <h5 class="generalization-task">Stack Bowls</h5>
+                  <div class="generalization-videos">
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/stack_bowls/ori.mp4" type="video/mp4"></video><div>Robot-Only</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/stack_bowls/mix.mp4" type="video/mp4"></video><div>Mixed Data (Random)</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/stack_bowls/ReWeight.mp4" type="video/mp4"></video><div>ReWeight (Ours)</div></div>
+                  </div>
+                </div>
+                <div class="generalization-row">
+                  <h5 class="generalization-task">Place Teddy in the Drawer</h5>
+                  <div class="generalization-videos">
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/place_teddy_in_the_drawer/ori.mp4" type="video/mp4"></video><div>Robot-Only</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/place_teddy_in_the_drawer/mix.mp4" type="video/mp4"></video><div>Mixed Data (Random)</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/place_teddy_in_the_drawer/ReWeight.mp4" type="video/mp4"></video><div>ReWeight (Ours)</div></div>
+                  </div>
+                </div>
+                <div class="generalization-row">
+                  <h5 class="generalization-task">Place Fruits Basket</h5>
+                  <div class="generalization-videos">
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/place_fruits_basket/ori.mp4" type="video/mp4"></video><div>Robot-Only</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/place_fruits_basket/mix.mp4" type="video/mp4"></video><div>Mixed Data (Random)</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/place_fruits_basket/ReWeight.mp4" type="video/mp4"></video><div>ReWeight (Ours)</div></div>
+                  </div>
+                </div>
+                <div class="generalization-row">
+                  <h5 class="generalization-task">Press Stapler</h5>
+                  <div class="generalization-videos">
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/press_stapler/ori.mp4" type="video/mp4"></video><div>Robot-Only</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/press_stapler/mix.mp4" type="video/mp4"></video><div>Mixed Data (Random)</div></div>
+                    <div class="generalization-video"><video autoplay muted loop playsinline controls><source src="./static/video/generalization_dobot/visual_distractor/press_stapler/ReWeight.mp4" type="video/mp4"></video><div>ReWeight (Ours)</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    
+    <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const inner = document.getElementById('video-inner');
+    const slider = document.getElementById('tab-slider');
+    
+    function showVideoGroup(index){
+      inner.style.transform = `translateX(-${index * 100}%)`;
+    
+      // 底部滑块
+      const tab = tabs[index];
+      slider.style.width = tab.offsetWidth + 'px';
+      slider.style.left = tab.offsetLeft + 'px';
+    }
+    
+    // 初始化
+    window.onload = () => {
+      showVideoGroup(0);
+    };
+    
+    // 点击切换
+    tabs.forEach(tab=>{
+      tab.addEventListener('click',()=>{
+        const idx = parseInt(tab.dataset.index);
+        showVideoGroup(idx);
+      });
+    });
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+
+    <!-- Safety Visualization Results -->
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('video').forEach(video => {
+          video.muted = true;
+        });
+
+        document.querySelectorAll('.realworld-video video, .generalization-video video').forEach(video => {
+          video.playbackRate = 2;
+        });
+
+        document.querySelectorAll('.alignment-example video').forEach(video => {
+          video.playbackRate = 1;
+        });
+      });
+    </script>
+  </body>
+</html>
