@@ -126,8 +126,7 @@
         <div class="columns is-centered has-text-centered">
           <div class="column is-two-thirds ">
             <div class="content has-text-justified">
-              Large-scale egocentric human demonstrations provide a scalable source of embodied supervision for Vision-Language-Action (VLA) models, but effectively leveraging them for downstream VLA post-training remains challenging because human demonstrations vary in their relevance to a target robot and task distribution. We introduce <strong>ReWeight</strong>, a relevance-aware framework that selectively incorporReWeights egocentric human demonstrations into VLA post-training. <strong>EgoWeight</strong> learns a cross-embodiment visuomotor representation to retrieve relevant human demonstrations and assign sample-specific weights according to fine-grained human-robot discrepancy. Across eight RoboTwin 2.0 tasks and four real-world bimanual manipulation tasks, ReWeight consistently improves over robot-only post-training and naive human-robot data mixing.
-            </div>
+              Post-training vision-language-action (VLA) models for specific robots and tasks requires in-domain demonstrations, yet collecting diverse robot data is costly. Egocentric human demonstrations provide a scalable alternative, but directly mixing human and robot data can introduce cross-embodiment discrepancies and degrade policy performance. To address this challenge, we introduce ReWeight, a framework that incorporates human data into VLA post-training through demonstration-level retrieval and sample-level weighting. ReWeight learns a cross-embodiment visuomotor representation that combines visual observations with future actions to measure behavioral similarity between human and robot demonstrations. Based on optimal transport, it retrieves human demonstrations relevant to the target robot data and assigns larger weights to samples with smaller cross-embodiment discrepancies. We evaluate ReWeight using &pi;<sub>0.5</sub> across eight simulation tasks and four real-world tasks under both clean and randomized settings. In simulation, ReWeight improves the average success rate of post-trained &pi;<sub>0.5</sub> from 39% with only robot data and 44% with randomly mixed human-robot data to 57%. In real-world experiments, under the clean environment, it achieves an average success rate of 68.8%, outperforming the other two baselines by 28.8 and 13.8 percentage points respectively. Under lighting changes and visual distractors, ReWeight achieves a 60.0% overall success rate, compared with 28.8% and 41.3% for the two baselines. Overall, ReWeight provides an effective paradigm for transforming abundant egocentric human experience into transferable supervision for robot learning.
           </div>
           </div>
         </div>
@@ -255,6 +254,55 @@
       </div>
     </section>
 
+
+    <!-- Simulation SmoothGrad Demo -->
+    <section class="section body simulation-smoothgrad-section">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-11">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">Simulation Demo: SmoothGrad</h2>
+            <div class="smoothgrad-demo-list">
+              <div class="smoothgrad-demo-item">
+                <h4 class="smoothgrad-task-title">Stack Blocks Two</h4>
+                <div class="smoothgrad-method-header">
+                  <span>Robot-Only</span>
+                  <span>Mixing Data (Random<sub>1.0</sub>)</span>
+                  <span>ReWeight (Ours)</span>
+                </div>
+                <img src="./static/video/simulation_smoothgrad/stack_blocks_two_ep004_smoothgrad_ori_mix_ours_3x.gif" alt="SmoothGrad demo for Stack Blocks Two">
+              </div>
+              <div class="smoothgrad-demo-item">
+                <h4 class="smoothgrad-task-title">Stack Blocks Three</h4>
+                <div class="smoothgrad-method-header">
+                  <span>Robot-Only</span>
+                  <span>Mixing Data (Random<sub>1.0</sub>)</span>
+                  <span>ReWeight (Ours)</span>
+                </div>
+                <img src="./static/video/simulation_smoothgrad/stack_blocks_three_ep002_smoothgrad_ori_mix_ours_3x.gif" alt="SmoothGrad demo for Stack Blocks Three">
+              </div>
+              <div class="smoothgrad-demo-item">
+                <h4 class="smoothgrad-task-title">Place Bread Basket</h4>
+                <div class="smoothgrad-method-header">
+                  <span>Robot-Only</span>
+                  <span>Mixing Data (Random<sub>1.0</sub>)</span>
+                  <span>ReWeight (Ours)</span>
+                </div>
+                <img src="./static/video/simulation_smoothgrad/place_bread_basket_seed100008_smoothgrad_ori_mix_ours_3x.gif" alt="SmoothGrad demo for Place Bread Basket">
+              </div>
+              <div class="smoothgrad-demo-item">
+                <h4 class="smoothgrad-task-title">Put Object Cabinet</h4>
+                <div class="smoothgrad-method-header">
+                  <span>Robot-Only</span>
+                  <span>Mixing Data (Random<sub>1.0</sub>)</span>
+                  <span>ReWeight (Ours)</span>
+                </div>
+                <img src="./static/video/simulation_smoothgrad/put_object_cabinet_seed100029_smoothgrad_ori_mix_ours_3x.gif" alt="SmoothGrad demo for Put Object Cabinet">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Simulation Experiment Results -->
     <section class="section body">
@@ -461,7 +509,7 @@
               </div>
                 <div class="row">
                   <div class="col">
-                    <img class="realworld-results-figure" src="static/images/real_world_results.png" alt="real-world results">
+                    <img class="realworld-results-figure" src="static/images/fig-realworld_exp_clean.png" alt="real-world results">
                   </div>
                 </div>
                 <div class="columns is-centered ">
