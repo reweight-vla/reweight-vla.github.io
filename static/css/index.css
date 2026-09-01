@@ -147,7 +147,9 @@ body {
 
 .smoothgrad-demo-list {
   display: grid;
-  gap: 22px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 24px;
+  align-items: start;
 }
 
 .smoothgrad-demo-item {
@@ -167,7 +169,7 @@ body {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
   margin: 0 auto 6px;
-  max-width: 960px;
+  max-width: 100%;
   color: #2a333f;
   font-size: 15px;
   font-weight: 700;
@@ -176,7 +178,7 @@ body {
 
 .smoothgrad-demo-item img {
   display: block;
-  width: min(100%, 960px);
+  width: 100%;
   height: auto;
   margin: 0 auto;
   border: 2px solid #7d98c3;
@@ -341,6 +343,10 @@ body {
     justify-content: stretch;
   }
 
+
+  .smoothgrad-demo-list {
+    grid-template-columns: 1fr;
+  }
 
   .smoothgrad-method-header {
     font-size: 12px;

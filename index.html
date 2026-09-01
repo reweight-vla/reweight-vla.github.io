@@ -255,6 +255,39 @@
     </section>
 
 
+    <!-- Simulation Experiment Results -->
+    <section class="section body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">
+              Simulation Results: RoboTwin 2.0
+            </h2>
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                  <div class="columns is-centered">
+                    <div class="column is-half">
+                      <img src="./static/images/retrieval_weighting_clean_horizontal.svg" alt="RoboTwin 2.0 Robot-Only Results" width="100%">
+                    </div>
+                    <div class="column is-half">
+                      <img src="./static/images/retrieval_weighting_randomized_horizontal.svg" alt="RoboTwin 2.0 ReWeight Results" width="100%">
+                    </div>
+                  </div>
+                  <p style="text-align: left; font-size: 18px; margin-top: 15px; padding-left: 10px;">
+                    <strong>RoboTwin 2.0 — VLA Post-Training</strong>: <strong>ReWeight</strong> selectively retrieves and weights egocentric human demonstrations for post-training, consistently outperforming both <strong>Robot-Only</strong> training and <strong>Mixed Data (Random)</strong> human-robot data mixing across eight simulation tasks. The results show that relevant and fine-grained weighted human experience is more effective than indiscriminately adding human demonstrations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+
     <!-- Simulation SmoothGrad Demo -->
     <section class="section body simulation-smoothgrad-section">
       <div class="container">
@@ -304,39 +337,6 @@
       </div>
     </section>
 
-    <!-- Simulation Experiment Results -->
-    <section class="section body">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-full-width">
-            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">
-              Simulation Results: RoboTwin 2.0
-            </h2>
-            <div class="columns is-centered has-text-centered">
-              <div class="column is-four-fifths">
-                <div class="content has-text-justified">
-                  <div class="columns is-centered">
-                    <div class="column is-half">
-                      <img src="./static/images/retrieval_weighting_clean_horizontal.svg" alt="RoboTwin 2.0 Robot-Only Results" width="100%">
-                    </div>
-                    <div class="column is-half">
-                      <img src="./static/images/retrieval_weighting_randomized_horizontal.svg" alt="RoboTwin 2.0 ReWeight Results" width="100%">
-                    </div>
-                  </div>
-                  <p style="text-align: left; font-size: 18px; margin-top: 15px; padding-left: 10px;">
-                    <strong>RoboTwin 2.0 — VLA Post-Training</strong>: <strong>ReWeight</strong> selectively retrieves and weights egocentric human demonstrations for post-training, consistently outperforming both <strong>Robot-Only</strong> training and <strong>Mixed Data (Random)</strong> human-robot data mixing across eight simulation tasks. The results show that relevant and fine-grained weighted human experience is more effective than indiscriminately adding human demonstrations.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    
-    
-
     <section class="section body">
       <div class="container">
         <div class="columns is-centered">
@@ -354,6 +354,17 @@
                 <p><strong>ReWeight</strong> improves real-world VLA post-training by retrieving transferable egocentric human demonstrations and assigning sample-level weights, yielding stronger performance than robot-only training and naive human-robot data mixing.</p>
 
               </div>
+                <div class="row">
+                  <div class="col">
+                    <img class="realworld-results-figure" src="static/images/fig-realworld_exp_clean.png" alt="real-world results">
+                  </div>
+                </div>
+                <div class="columns is-centered ">
+                  <div class="column">
+                      <p style="text-align: left;font-size: 18px">Real-world evaluation on physical robot experiments. The results compare <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight (Ours)</strong> across four tasks and the overall average, showing that selectively retrieved and weighted human demonstrations lead to stronger VLA post-training performance.</p>
+                </div>
+              </div>
+
               <div class="columns is-vcentered interpolation-panel">
                 <div class="column  has-text-centered">
                   <h5>Stack Bowls</h5>
@@ -505,16 +516,6 @@
 
                   
 
-                </div>
-              </div>
-                <div class="row">
-                  <div class="col">
-                    <img class="realworld-results-figure" src="static/images/fig-realworld_exp_clean.png" alt="real-world results">
-                  </div>
-                </div>
-                <div class="columns is-centered ">
-                  <div class="column">
-                      <p style="text-align: left;font-size: 18px">Real-world evaluation on physical robot experiments. The results compare <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight (Ours)</strong> across four tasks and the overall average, showing that selectively retrieved and weighted human demonstrations lead to stronger VLA post-training performance.</p>
                 </div>
               </div>
                 </td>
