@@ -68,22 +68,10 @@ body {
   vertical-align: top;
 }
 
-
-.realworld-task-title {
-  grid-column: 1 / -1;
-  margin: 0 0 10px;
-  color: #26364f;
-  font-size: 24px;
-  font-weight: 900;
-  line-height: 1.2;
-}
-
 .realworld-video-label {
-  margin-top: 8px;
+  margin-top: 5px;
   text-align: center;
-  font-size: 17px;
-  font-weight: 800;
-  line-height: 1.2;
+  font-weight: 600;
 }
 
 .method-figure {
@@ -91,12 +79,6 @@ body {
   height: auto;
 }
 
-.framework-figure {
-  display: block;
-  width: min(100%, 1480px);
-  height: auto;
-  margin: 0 auto;
-}
 
 .alignment-video {
   display: block;
@@ -117,15 +99,15 @@ body {
 
 .alignment-example-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px 26px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
   margin-bottom: 28px;
 }
 
 .alignment-example {
   text-align: center;
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
   line-height: 1.25;
 }
 
@@ -160,63 +142,59 @@ body {
   justify-content: center;
 }
 
+
+.simulation-smoothgrad-section {
+  padding-top: 1.8rem;
+}
+
+.smoothgrad-demo-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 24px;
+  align-items: start;
+}
+
+.smoothgrad-demo-item {
+  text-align: center;
+}
+
+.smoothgrad-task-title {
+  margin: 0 0 8px;
+  color: #26364f;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.smoothgrad-method-header {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 auto 6px;
+  max-width: 100%;
+  color: #2a333f;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.smoothgrad-demo-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 2px solid #7d98c3;
+  border-radius: 8px;
+  background: #f5f8fc;
+}
+
 .realworld-results-figure {
   display: block;
-  width: min(100%, 1080px);
+  width: 66.666%;
   height: auto;
   margin: 0 auto;
 }
 
-.simulation-results-figures {
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
-}
-
-.realworld-results-content .interpolation-panel {
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
-}
-
-.realworld-results-content .column.has-text-centered {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.realworld-video {
-  width: 33%;
-}
-
-
-.realworld-results-content .interpolation-panel {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 26px;
-  margin: 24px 0 0;
-}
-
-.realworld-results-content .interpolation-panel > .column.has-text-centered {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  align-items: start;
-  width: 100%;
-  padding: 0;
-}
-
-.realworld-results-content .interpolation-panel h5,
-.realworld-results-content .interpolation-panel p {
-  grid-column: 1 / -1;
-}
-
-.realworld-results-content .realworld-video {
-  display: block;
-  width: 100%;
-}
-
-.realworld-results-content .realworld-video video {
-  display: block;
-  width: 100%;
-}
 
 .generalization-wrapper {
   overflow: hidden;
@@ -300,47 +278,11 @@ body {
 .generalization-panel {
   flex: 0 0 100%;
   width: 100%;
-  padding: 18px 56px;
+  padding: 18px;
   border: 4px solid #7d98c3;
   border-radius: 12px;
 }
 
-.generalization-panel {
-  position: relative;
-}
-
-.generalization-arrow {
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  width: 78px;
-  height: 112px;
-  border: none;
-  background: transparent;
-  color: #7d98c3;
-  cursor: pointer;
-  font-size: 96px;
-  font-weight: 900;
-  line-height: 1;
-  transform: translateY(-50%);
-  opacity: 0.95;
-}
-
-.generalization-arrow:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.08);
-}
-
-.generalization-arrow-next {
-  right: 8px;
-  text-align: right;
-}
-
-.generalization-arrow-prev {
-  left: 8px;
-  text-align: left;
-  color: #d4a6c8;
-}
 
 .generalization-panel-distractor {
   border-color: #d4a6c8;
@@ -391,19 +333,6 @@ body {
     margin-bottom: 1rem;
   }
 
-  .realworld-results-content .interpolation-panel > .column.has-text-centered {
-    grid-template-columns: 1fr;
-  }
-
-  .realworld-results-content .interpolation-panel {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .realworld-results-content .column.has-text-centered {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
 
   .realworld-results-figure {
     width: 100%;
@@ -417,28 +346,11 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .generalization-arrow {
-    width: 52px;
-    height: 80px;
-    font-size: 64px;
-    line-height: 1;
-  }
-
-  .generalization-arrow-next {
-    right: 0;
-  }
-
-  .generalization-arrow-prev {
-    left: 0;
-  }
 
   .generalization-row {
     grid-template-columns: 1fr;
   }
 
-  .generalization-panel {
-    padding: 18px 42px;
-  }
 
   .generalization-task {
     text-align: center;
@@ -447,6 +359,15 @@ body {
   .generalization-videos {
     grid-template-columns: 1fr;
     justify-content: stretch;
+  }
+
+
+  .smoothgrad-demo-list {
+    grid-template-columns: 1fr;
+  }
+
+  .smoothgrad-method-header {
+    font-size: 12px;
   }
 
 }

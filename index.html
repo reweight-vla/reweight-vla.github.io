@@ -101,7 +101,7 @@
       <div class="container is-max-desktop">
         <div class="hero-body">
           <div align="center">
-            <img src="./static/images/fig-teaser.png" alt="method overview" width="95%">
+            <img src="./static/images/fig-teaser.png" alt="method overview" width="85%">
           </div>  
           <br> 
           <p class="overview-caption">
@@ -126,7 +126,7 @@
         <div class="columns is-centered has-text-centered">
           <div class="column is-two-thirds ">
             <div class="content has-text-justified">
-              Post-training vision-language-action (VLA) models for specific robots and tasks requires in-domain demonstrations, yet collecting diverse robot data is costly. Egocentric human demonstrations provide a scalable alternative, but directly mixing human and robot data can introduce cross-embodiment discrepancies and degrade policy performance. To address this challenge, we introduce ReWeight, a framework that incorporates human data into VLA post-training through demonstration-level retrieval and sample-level weighting. ReWeight learns a cross-embodiment visuomotor representation that combines visual observations with future actions to measure behavioral similarity between human and robot demonstrations. Based on optimal transport, it retrieves human demonstrations relevant to the target robot data and assigns larger weights to samples with smaller cross-embodiment discrepancies. We evaluate ReWeight using &pi;<sub>0.5</sub> across eight simulation tasks and four real-world tasks under both clean and randomized settings. In simulation, ReWeight improves the average success rate of post-trained &pi;<sub>0.5</sub> from 39% with only robot data and 44% with randomly mixed human-robot data to 57%. In real-world experiments, under the clean environment, it achieves an average success rate of 68.8%, outperforming the other two baselines by 28.8 and 13.8 percentage points respectively. Under lighting changes and visual distractors, ReWeight achieves a 60.0% overall success rate, compared with 28.8% and 41.3% for the two baselines. Overall, ReWeight provides an effective paradigm for transforming abundant egocentric human experience into transferable supervision for robot learning.
+              Post-training vision-language-action (VLA) models for specific robots and tasks requires in-domain demonstrations, yet collecting diverse robot data is costly. Egocentric human demonstrations provide a scalable alternative, but directly mixing human and robot data can introduce cross-embodiment discrepancies and degrade policy performance. To address this challenge, we introduce ReWeight, a framework that incorporates human data into VLA post-training through demonstration-level retrieval and sample-level weighting. ReWeight learns a cross-embodiment visuomotor representation that combines visual observations with future actions to measure behavioral similarity between human and robot demonstrations. Based on optimal transport, it retrieves human demonstrations relevant to the target robot data and assigns larger weights to samples with smaller cross-embodiment discrepancies. We evaluate ReWeight using &pi;<sub>0.5</sub> across eight simulation tasks and four real-world tasks under both clean and randomized settings. In simulation, ReWeight improves the average success rate of post-trained &pi;<sub>0.5</sub> from 39% with only robot data and 44% with randomly mixed human-robot data to 57%. In the physical experimental setting, it achieves an average success rate of 68.8%, outperforming the baselines by 28.8% and 13.8%, respectively. Overall, ReWeight provides an effective paradigm for transforming abundant egocentric human experience into transferable supervision for robot learning.
           </div>
           </div>
         </div>
@@ -142,9 +142,9 @@
             <div class="content">
               <div style="text-align: center;">
                 <img class="method-figure"
-                    src="./static/images/fig-overall_framework.png"
+                    src="./static/images/fig-overall_framework.jpeg"
                     alt="method overview"
-                    width="100%">
+                    width="120%">
               </div>
 
               <p class="overview-caption">
@@ -277,55 +277,6 @@
     
     
 
-    <!-- Simulation SmoothGrad Demo -->
-    <section class="section body simulation-smoothgrad-section">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-11">
-            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">Simulation Demo: SmoothGrad</h2>
-            <div class="smoothgrad-demo-list">
-              <div class="smoothgrad-demo-item">
-                <h4 class="smoothgrad-task-title">Stack Blocks Two</h4>
-                <div class="smoothgrad-method-header">
-                  <span>Robot-Only</span>
-                  <span>Mixing Data (Random<sub>1.0</sub>)</span>
-                  <span>ReWeight (Ours)</span>
-                </div>
-                <img src="./static/video/simulation_smoothgrad/stack_blocks_two_ep004_smoothgrad_ori_mix_ours_3x.gif" alt="SmoothGrad demo for Stack Blocks Two">
-              </div>
-              <div class="smoothgrad-demo-item">
-                <h4 class="smoothgrad-task-title">Stack Blocks Three</h4>
-                <div class="smoothgrad-method-header">
-                  <span>Robot-Only</span>
-                  <span>Mixing Data (Random<sub>1.0</sub>)</span>
-                  <span>ReWeight (Ours)</span>
-                </div>
-                <img src="./static/video/simulation_smoothgrad/stack_blocks_three_ep002_smoothgrad_ori_mix_ours_3x.gif" alt="SmoothGrad demo for Stack Blocks Three">
-              </div>
-              <div class="smoothgrad-demo-item">
-                <h4 class="smoothgrad-task-title">Place Bread Basket</h4>
-                <div class="smoothgrad-method-header">
-                  <span>Robot-Only</span>
-                  <span>Mixing Data (Random<sub>1.0</sub>)</span>
-                  <span>ReWeight (Ours)</span>
-                </div>
-                <img src="./static/video/simulation_smoothgrad/place_bread_basket_seed100008_smoothgrad_ori_mix_ours_3x.gif" alt="SmoothGrad demo for Place Bread Basket">
-              </div>
-              <div class="smoothgrad-demo-item">
-                <h4 class="smoothgrad-task-title">Put Object Cabinet</h4>
-                <div class="smoothgrad-method-header">
-                  <span>Robot-Only</span>
-                  <span>Mixing Data (Random<sub>1.0</sub>)</span>
-                  <span>ReWeight (Ours)</span>
-                </div>
-                <img src="./static/video/simulation_smoothgrad/put_object_cabinet_seed100029_smoothgrad_ori_mix_ours_3x.gif" alt="SmoothGrad demo for Put Object Cabinet">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section body">
       <div class="container">
         <div class="columns is-centered">
@@ -333,10 +284,10 @@
             <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">Real-world Results</h2>
             <!-- <h2 class="subtitle is-4" style="text-align: center;">Defining Visual Affordances</h2> -->
             <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths ">
+            <div class="column is-11 realworld-results-content">
               <div class="content has-text-justified">
                 <p>
-                  Below are videos of <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight</strong> on real-world bimanual manipulation tasks. (Videos are sped up by 2x.)
+                  Below are videos of <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight</strong> on real-world manipulation tasks. (Videos are sped up by 2x.)
                 </p>
               </div>
               <div class="content has-text-justified">
@@ -356,10 +307,7 @@
 
               <div class="columns is-vcentered interpolation-panel">
                 <div class="column  has-text-centered">
-                  <h5>Stack Bowls</h5>
-                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
-                    (Real-world Bimanual Task)
-                  </p>
+                  <h5 class="realworld-task-title"><strong>Stack Bowls</strong></h5>
                   <div class="realworld-video">
                     <video autoplay controls muted loop playsinline width="100%">
                         <source src="./static/video/base/stack_bowls/ori.mp4" type="video/mp4">
@@ -386,10 +334,7 @@
                 </div>
                 </div>
                 <div class="column  has-text-centered">
-                  <h5>Place Teddy in the Drawer</h5>
-                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
-                    (Real-world Bimanual Task)
-                  </p>
+                  <h5 class="realworld-task-title"><strong>Place Teddy in the Drawer</strong></h5>
                   <div class="realworld-video">
                     <video autoplay controls muted loop playsinline width="100%">
                       <source src="./static/video/base/place_teddy_in_the_drawer/ori.mp4" type="video/mp4">
@@ -419,10 +364,7 @@
   
               <div class="columns is-vcentered interpolation-panel">
                 <div class="column  has-text-centered">
-                  <h5>Place Fruits Basket</h5>
-                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
-                    (Real-world Bimanual Task)
-                  </p>
+                  <h5 class="realworld-task-title"><strong>Place Fruits Basket</strong></h5>
                   <div class="realworld-video">
                     <video autoplay controls muted loop playsinline width="100%">
                         <source src="./static/video/base/place_fruits_basket/ori.mp4" type="video/mp4">
@@ -449,10 +391,7 @@
                 </div>
                 </div>
                 <div class="column  has-text-centered">
-                  <h5>Press Stapler</h5>
-                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
-                    (Real-world Bimanual Task)
-                  </p>
+                  <h5 class="realworld-task-title"><strong>Press Stapler</strong></h5>
                   <div class="realworld-video">
                     <video autoplay controls muted loop playsinline width="100%">
                       <source src="./static/video/base/press_stapler/ori.mp4" type="video/mp4">
@@ -641,6 +580,7 @@
         <div id="video-wrapper" class="generalization-wrapper">
           <div id="video-inner" class="generalization-inner">
             <div class="generalization-panel generalization-panel-light">
+              <button class="generalization-arrow generalization-arrow-next" type="button" data-index="1" aria-label="Show visual distractor results">&#8250;</button>
               <div class="generalization-table">
                 <div class="generalization-row">
                   <h5 class="generalization-task">Stack Bowls</h5>
@@ -678,6 +618,7 @@
             </div>
 
             <div class="generalization-panel generalization-panel-distractor">
+              <button class="generalization-arrow generalization-arrow-prev" type="button" data-index="0" aria-label="Show varying illumination results">&#8249;</button>
               <div class="generalization-table">
                 <div class="generalization-row">
                   <h5 class="generalization-task">Stack Bowls</h5>
@@ -719,6 +660,7 @@
     
     <script>
     const tabs = document.querySelectorAll('.tab-btn');
+    const arrows = document.querySelectorAll('.generalization-arrow');
     const inner = document.getElementById('video-inner');
     const slider = document.getElementById('tab-slider');
     
@@ -740,6 +682,13 @@
     tabs.forEach(tab=>{
       tab.addEventListener('click',()=>{
         const idx = parseInt(tab.dataset.index);
+        showVideoGroup(idx);
+      });
+    });
+
+    arrows.forEach(arrow=>{
+      arrow.addEventListener('click',()=>{
+        const idx = parseInt(arrow.dataset.index);
         showVideoGroup(idx);
       });
     });
@@ -777,4 +726,3 @@
     </script>
   </body>
 </html>
- 
