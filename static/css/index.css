@@ -87,8 +87,10 @@ body {
 }
 
 .method-figure {
+  display: block;
   width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
 .framework-figure {
@@ -191,7 +193,9 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 26px;
-  margin: 24px 0 0;
+  width: 80%;
+  max-width: 960px;
+  margin: 24px auto 0 !important;
 }
 
 .realworld-results-content .interpolation-panel > .column.has-text-centered {

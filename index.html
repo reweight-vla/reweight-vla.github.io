@@ -105,7 +105,7 @@
           </div>  
           <br> 
           <p class="overview-caption">
-            Overview of <strong>ReWeight</strong>, a framework that retrieves transferable human demonstrations and assigns sample-level weights for VLA post-training.
+            Illustration of <strong>ReWeight</strong>, retrieving human demonstrations and assigning sample weights for VLA post-training.
           </p>
           
         </div>
@@ -138,13 +138,12 @@
     <section class="section body">
       <div class="container">
         <div class="columns is-centered">
-          <div class="column is-four-fifths">
+          <div class="column is-11">
             <div class="content">
               <div style="text-align: center;">
                 <img class="method-figure"
                     src="./static/images/fig-overall_framework.jpeg"
-                    alt="method overview"
-                    width="120%">
+                    alt="method overview">
               </div>
 
               <p class="overview-caption">
@@ -253,7 +252,7 @@
               Simulation Results: RoboTwin 2.0
             </h2>
             <div class="columns is-centered has-text-centered">
-              <div class="column is-four-fifths">
+              <div class="column is-11">
                 <div class="content has-text-justified">
                   <div class="columns is-centered">
                     <div class="column is-half">
@@ -285,15 +284,15 @@
             <!-- <h2 class="subtitle is-4" style="text-align: center;">Defining Visual Affordances</h2> -->
             <div class="columns is-centered has-text-centered">
             <div class="column is-11 realworld-results-content">
-              <div class="content has-text-justified">
+              <div class="content has-text-centered">
                 <p>
-                  Below are videos of <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight</strong> on real-world manipulation tasks. (Videos are sped up by 2x.)
+                  Below are videos of <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight (Ours)</strong> on real-world manipulation tasks. (Videos are sped up by 2x.)
                 </p>
               </div>
-              <div class="content has-text-justified">
+              <!-- <div class="content has-text-justified">
                 <p><strong>ReWeight</strong> improves real-world VLA post-training by retrieving transferable egocentric human demonstrations and assigning sample-level weights, yielding stronger performance than robot-only training and naive human-robot data mixing.</p>
 
-              </div>
+              </div> -->
                 <div class="row">
                   <div class="col">
                     <img class="realworld-results-figure" src="static/images/fig-realworld_exp_clean.png" alt="real-world results">
@@ -301,7 +300,7 @@
                 </div>
                 <div class="columns is-centered ">
                   <div class="column">
-                      <p style="text-align: left;font-size: 18px">Real-world evaluation on physical robot experiments. The results compare <strong>Robot-Only</strong>, <strong>Mixed Data (Random)</strong>, and <strong>ReWeight (Ours)</strong> across four tasks and the overall average, showing that selectively retrieved and weighted human demonstrations lead to stronger VLA post-training performance.</p>
+                      <p style="text-align: left;font-size: 18px">Real-world evaluation across four physical robot manipulation tasks. The task-level and average success rates show that <strong>ReWeight (Ours)</strong>, which selectively retrieves and weights human demonstrations, consistently outperforms <strong>Robot-Only</strong> and <strong>Mixed Data (Random)</strong>.</p>
                 </div>
               </div>
 
