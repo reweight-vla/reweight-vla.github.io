@@ -478,6 +478,11 @@ body {
 }
 
 .publication-authors {
+  font-family: 'Castoro', Georgia, serif;
+  font-size: 1.45rem !important;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #1f2933;
 }
 
 .publication-authors a {
@@ -490,6 +495,65 @@ body {
 
 .author-block {
   display: inline-block;
+}
+
+.corresponding-author {
+  margin: 0.45rem 0 0;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.82em;
+  color: #7a8490;
+}
+
+.publication-affiliations {
+  margin: 0.85rem auto 0;
+  max-width: 980px;
+  font-family: 'Castoro', Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: #7a8490;
+}
+
+.publication-affiliations p {
+  margin: 0.1rem 0;
+}
+
+.affiliation-lines {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.affiliation-email {
+  font-size: 0.72em;
+}
+
+.affiliation-logo-slots {
+  display: flex;
+  justify-content: center;
+  gap: 0.15rem;
+  margin: 0.85rem auto 0;
+}
+
+.affiliation-logo {
+  width: 180px;
+  height: 108px;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 480px) {
+  .affiliation-lines {
+    flex-wrap: wrap;
+    gap: 0 1rem;
+  }
+
+  .affiliation-logo-slots {
+    gap: 0.5rem;
+  }
+
+  .affiliation-logo {
+    width: min(44vw, 180px);
+    height: 60px;
+  }
 }
 
 .publication-banner img {
